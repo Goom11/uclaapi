@@ -1,4 +1,4 @@
-from ...models import *
+#from models import *
 from bs4 import BeautifulSoup
 import sys
 
@@ -30,10 +30,20 @@ def multiple():
     print len(courses)
 
 def create_course_from_tag(tag):
-    #TODO
+    course_name = tag.find('div', {"class":"courseheader"}).text.strip()
+    print "[%s]" % course_name
+    instructor = tag.find('div', {"class":"coursenotes"}).text.strip()[11:]
+    print "[%s]" % instructor
     return
 
 def get_course_list_from_soup(soup):
+    tag = BeautifulSoup('<b></b>')
+    tag = tag.b
+    soup = soup.find(id="ctl00_PageContent_pnlPrintMode")
+    course_list = []
+    for foo in soup:
+        if type(foo) == type(tag):
+            course_list.append(foo)
     return course_list
 
 def main():
@@ -41,7 +51,6 @@ def main():
     #multiple()
     soup = BeautifulSoup((open(sys.argv[1])))
     print "Opening %s..." % sys.argv[1]  
-    return
     course_list = get_course_list_from_soup(soup)
     for course in course_list:
         create_course_from_tag(course)
