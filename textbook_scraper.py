@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 def single():
-    soup = BeautifulSoup(open("/Users/Lowell/Desktop/single_textbook.html"))
+    soup = BeautifulSoup(open("/Users/Lowell/gits/uclaapi/single_textbook.html"))
     
     title = str(soup.tbody.a.text).strip()
     
@@ -16,7 +16,7 @@ def single():
     print textbook
 
 def main():
-    print "sane"
+    single()
 
 if __name__ == "__main__":
         main()
