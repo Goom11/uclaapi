@@ -31,36 +31,37 @@ def multiple():
     print "courses:"
     print len(courses)
 
+def get_tags_from_soup(soup):
+    tag = BeautifulSoup('<b></b>')
+    tag = tag.b
+    tag_list = []
+    for foo in soup:
+        if type(foo) == type(tag):
+            tag_list.append(foo)
+    return tag_list
 
 def create_course_from_tag(tag):
     course_name = tag.find('div', {"class":"courseheader"}).text.strip()
     print "[%s]" % course_name
     instructor = tag.find('div', {"class":"coursenotes"}).text.strip()[11:]
     print "[%s]" % instructor
+    textbooks = tag.find('ul').find('div', {"class":"Products"}).table.tbody
+    textbooks = get_tags_from_soup(textbooks)
+    print "[%s]" % textbooks
+    print len(textbooks)
+    for b in textbooks:
+        print type(b)
     return
 
-
 def get_course_list_from_soup(soup):
-    tag = BeautifulSoup('<b></b>')
-    tag = tag.b
     soup = soup.find(id="ctl00_PageContent_pnlPrintMode")
-    course_list = []
-    for foo in soup:
-        if type(foo) == type(tag):
-            course_list.append(foo)
-    return course_list
-
+    return get_tags_from_soup(soup)
 
 def main():
     #single()
     #multiple()
     soup = BeautifulSoup((open(sys.argv[1])))
-<<<<<<< HEAD
-    print "Opening %s..." % sys.argv[1]  
-=======
     print "Opening %s..." % sys.argv[1]
-    return
->>>>>>> 11af3ad1ed5cdd1d814800027d9e28b8f0a8fc5a
     course_list = get_course_list_from_soup(soup)
     for course in course_list:
         create_course_from_tag(course)
