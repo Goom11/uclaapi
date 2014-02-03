@@ -1,9 +1,10 @@
-from models import *
+#from models import *
 from bs4 import BeautifulSoup
 from pprint import pprint
 import sys
 
 # TODO : handle the case where a course has no textbooks
+# TODO : implement save method
 
 def get_tags_from_soup(soup):
     tag = BeautifulSoup('<b></b>')
@@ -13,6 +14,9 @@ def get_tags_from_soup(soup):
         if type(foo) == type(tag):
             tag_list.append(foo)
     return tag_list
+
+def save_course(course_dict):
+    return
 
 def create_coursedict_from_tag(tag):
     coursedict = {}
@@ -32,8 +36,7 @@ def create_coursedict_from_tag(tag):
         bookdict['new_price'] = float(prices[0].span.text[1:])
         bookdict['old_price'] = float(prices[1].span.text[1:])
         coursedict['books'].append(bookdict)
-    pprint(coursedict)
-    return
+    return coursedict
 
 def get_course_list_from_soup(soup):
     soup = soup.find(id="ctl00_PageContent_pnlPrintMode")
@@ -44,7 +47,7 @@ def main():
     course_list = get_course_list_from_soup(soup)
     for course in course_list:
         print ""
-        create_coursedict_from_tag(course)
+        pprint(create_coursedict_from_tag(course))
     print ""
 
 if __name__ == "__main__":
