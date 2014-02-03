@@ -42,11 +42,12 @@ def main():
         for i, period in enumerate(periods):
             hours = cells[i+1].findAll('strong')
             restaurantdict['hours'][period] = {}
-            restaurantdict['hours'][period]['open'] = no_slash(plain_text(hours[0]))
             if len(hours) == 1:
                 restaurantdict['hours'][period]['close'] = 'CLOSED'
+                restaurantdict['hours'][period]['open'] = 'CLOSED'
             else:
                 restaurantdict['hours'][period]['close'] = plain_text(hours[1])
+                restaurantdict['hours'][period]['open'] = no_slash(plain_text(hours[0]))
 
         hourdict['restaurants'].append(restaurantdict)
     pprint(hourdict)
