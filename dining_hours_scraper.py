@@ -4,7 +4,11 @@
 # TODO: wrap with API
 
 import urllib2
+from pprint import pprint
 from bs4 import BeautifulSoup
+
+def plain_text(strong_tag):
+    return str(strong_tag.strong.text.strip())
 
 def main():
     url = "https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm"
@@ -13,10 +17,34 @@ def main():
     soup = BeautifulSoup(html)
     table = soup.find('table', {"border":"1"})
     rows = table.findAll('tr')
-    date = rows[0].td.strong.text.strip()
-    print "date: [%s]" % date
-    print rows[1]
-    #brkfst, lunch, dinner, late night
+    hourdict = {}
+    hourdict['date'] = plain_text(rows[0].td)
+    hourdict['restaurants'] = []
+    for i in range(2,10):
+        cells = rows[i].findAll('td')
+        restaurantdict = {}
+        restaurantdict['name'] = plain_text(cells[0])
+        restaurantdict['hours'] = {}
+
+        breakfast = cells[1].findAll('strong')
+        lunch     = cells[2].findAll('strong')
+        dinner    = cells[3].findAll('strong')
+        latenight = cells[4].findAll('strong')
+
+        #print breakfast
+
+        periods = ['breakfast', 'lunch', 'dinner', 'late night']
+
+        for i, period in enumerate(periods):
+            hours = cells[i+1].findAll('strong')
+            restaurantdict['hours'][period] = {}
+            restaurantdict['hours'][period]['open'] = hours[0]
+            restaurantdict['hours'][period]['close'] = hours[1]
+            break
+
+        hourdict['restaurants'].append(restaurantdict)
+        break
+    pprint(hourdict)
 
 if __name__ == "__main__":
     main()
