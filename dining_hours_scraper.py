@@ -31,18 +31,18 @@ def main():
         dinner    = cells[3].findAll('strong')
         latenight = cells[4].findAll('strong')
 
-        #print breakfast
-
         periods = ['breakfast', 'lunch', 'dinner', 'late night']
 
         for i, period in enumerate(periods):
             hours = cells[i+1].findAll('strong')
             restaurantdict['hours'][period] = {}
             restaurantdict['hours'][period]['open'] = plain_text(hours[0])
-            restaurantdict['hours'][period]['close'] = plain_text(hours[1])
+            if len(hours) == 1:
+                restaurantdict['hours'][period]['close'] = 'CLOSED'
+            else:
+                restaurantdict['hours'][period]['close'] = plain_text(hours[1])
 
         hourdict['restaurants'].append(restaurantdict)
-        break
     pprint(hourdict)
 
 if __name__ == "__main__":
