@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import sys
 
+# TODO : handle the case where a course has no textbooks
+
 def get_tags_from_soup(soup):
     tag = BeautifulSoup('<b></b>')
     tag = tag.b
@@ -12,7 +14,7 @@ def get_tags_from_soup(soup):
             tag_list.append(foo)
     return tag_list
 
-def create_course_from_tag(tag):
+def create_coursedict_from_tag(tag):
     coursedict = {}
     coursedict['course_name'] = tag.find('div', {"class":"courseheader"}).text.strip()
     coursedict['instructor'] = str(tag.find('div',
@@ -39,11 +41,11 @@ def get_course_list_from_soup(soup):
 
 def main():
     soup = BeautifulSoup((open(sys.argv[1])))
-    print "Opening %s..." % sys.argv[1]
     course_list = get_course_list_from_soup(soup)
     for course in course_list:
-        create_course_from_tag(course)
         print ""
+        create_coursedict_from_tag(course)
+    print ""
 
 if __name__ == "__main__":
         main()
