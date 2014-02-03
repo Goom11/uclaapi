@@ -1,5 +1,6 @@
 #from models import *
 from bs4 import BeautifulSoup
+from pprint import pprint
 import sys
 
 def get_tags_from_soup(soup):
@@ -16,7 +17,7 @@ def create_course_from_tag(tag):
     coursedict['course_name'] = tag.find('div', {"class":"courseheader"}).text.strip()
     coursedict['instructor'] = str(tag.find('div',
         {"class":"coursenotes"}).text.strip()[11:])
-    print coursedict
+    coursedict['books'] = []
     textbooks = tag.find('ul').find('div', {"class":"Products"}).table.tbody
     textbooks = get_tags_from_soup(textbooks)
     for book in textbooks:
@@ -28,7 +29,8 @@ def create_course_from_tag(tag):
                 {"class":"addcartform"}).find('div').findAll('div')
         bookdict['new_price'] = float(prices[0].span.text[1:])
         bookdict['old_price'] = float(prices[1].span.text[1:])
-        print bookdict
+        coursedict['books'].append(bookdict)
+    pprint(coursedict)
     return
 
 def get_course_list_from_soup(soup):
