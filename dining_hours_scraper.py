@@ -5,6 +5,14 @@ import urllib2
 from pprint import pprint
 from bs4 import BeautifulSoup
 
+def no_slash(date):
+    output = ""
+    for i in range(len(date)):
+        if date[i] == ' ':
+            return output
+        else:
+            output += date[i]
+
 def plain_text(strong_tag):
     return str(strong_tag.get_text().strip())
 
@@ -34,7 +42,7 @@ def main():
         for i, period in enumerate(periods):
             hours = cells[i+1].findAll('strong')
             restaurantdict['hours'][period] = {}
-            restaurantdict['hours'][period]['open'] = plain_text(hours[0])
+            restaurantdict['hours'][period]['open'] = no_slash(plain_text(hours[0]))
             if len(hours) == 1:
                 restaurantdict['hours'][period]['close'] = 'CLOSED'
             else:
