@@ -1,5 +1,3 @@
-# TODO: use urllib to get HTML
-# TODO: scrape HTML into a dict of hours
 # TODO: save hours in database (run daily, perhaps get hrs of future dates)
 # TODO: wrap with API
 
