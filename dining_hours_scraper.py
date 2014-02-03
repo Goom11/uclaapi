@@ -8,7 +8,10 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 
 def plain_text(strong_tag):
-    return str(strong_tag.strong.text.strip())
+    try:
+        return str(strong_tag.strong.text.strip())
+    except AttributeError:
+        return strong_tag
 
 def main():
     url = "https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm"
@@ -38,8 +41,8 @@ def main():
         for i, period in enumerate(periods):
             hours = cells[i+1].findAll('strong')
             restaurantdict['hours'][period] = {}
-            restaurantdict['hours'][period]['open'] = hours[0]
-            restaurantdict['hours'][period]['close'] = hours[1]
+            restaurantdict['hours'][period]['open'] = plain_text(hours[0])
+            restaurantdict['hours'][period]['close'] = plain_text(hours[1])
             break
 
         hourdict['restaurants'].append(restaurantdict)
