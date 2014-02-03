@@ -12,24 +12,23 @@ def get_tags_from_soup(soup):
     return tag_list
 
 def create_course_from_tag(tag):
-    course_name = tag.find('div', {"class":"courseheader"}).text.strip()
-    print "course name: [%s]" % course_name
-    instructor = tag.find('div', {"class":"coursenotes"}).text.strip()[11:]
-    print "instructor: [%s]" % instructor
+    coursedict = {}
+    coursedict['course_name'] = tag.find('div', {"class":"courseheader"}).text.strip()
+    coursedict['instructor'] = str(tag.find('div',
+        {"class":"coursenotes"}).text.strip()[11:])
+    print coursedict
     textbooks = tag.find('ul').find('div', {"class":"Products"}).table.tbody
     textbooks = get_tags_from_soup(textbooks)
     for book in textbooks:
-        title = book.a.text.strip()
-        print "title: [%s]" % title
-        SKU = book.find('div', id=lambda x: x and
-                x.endswith('SKU')).text.strip()[5:]
-        print "SKU: [%s]" % SKU 
+        bookdict = {}
+        bookdict['title'] = str(book.a.text.strip())
+        bookdict['SKU'] = str(book.find('div', id=lambda x: x and
+                x.endswith('SKU')).text.strip()[5:])
         prices = book.find('div',
                 {"class":"addcartform"}).find('div').findAll('div')
-        new_price = float(prices[0].span.text[1:])
-        old_price = float(prices[1].span.text[1:])
-        print "new_price: [%f]" % new_price
-        print "old_price: [%f]" % old_price
+        bookdict['new_price'] = float(prices[0].span.text[1:])
+        bookdict['old_price'] = float(prices[1].span.text[1:])
+        print bookdict
     return
 
 def get_course_list_from_soup(soup):
@@ -46,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
         main()
+
