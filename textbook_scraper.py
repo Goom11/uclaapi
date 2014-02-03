@@ -50,7 +50,7 @@ def create_course_from_tag(tag):
         prices = book.find('div',
                 {"class":"addcartform"}).find('div').findAll('div')
         for price in prices:
-            print "PRICE: %r" % price.span.text
+            print "PRICE: %r" % float(price.span.text[1:])
     return
 
 def get_course_list_from_soup(soup):
