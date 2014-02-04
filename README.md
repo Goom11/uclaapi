@@ -48,3 +48,4 @@ TODO
 * ~~Scrape [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm)~~ DONE!
 * Scrape [dining menus](http://menu.ha.ucla.edu/foodpro/default.asp)
 * Scrape the Registrar
+* Sexy versions of all of these
