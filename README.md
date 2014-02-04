@@ -1,21 +1,21 @@
 uclaapi
 =======
 
-Making it easier for people to make UCLA related apps.
+Making it easier for students to create UCLA-related apps.
 
 Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/)
 
 give it a try!
 =======
 
-To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage, run
+To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage,
 ````
-$ python [dining_hours_scraper.py](https://github.com/Goom11/uclaapi/blob/master/dining_hours_scraper.py)
+$ python dining_hours_scraper.py
 ````
 
-To generate JSON from the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx), run
+To generate JSON from the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx),
 ````
-$ python [textbook_scraper.py](https://github.com/Goom11/uclaapi/blob/master/textbook_scraper.py) [textbook_html/moar_txtbks.html](https://github.com/Goom11/uclaapi/blob/master/textbook_html/moar_txtbks.html) #or multiple_textbooks.html, single_textbook.html
+$ python textbook_scraper.pytextbook_html/moar_txtbks.html #or multiple_textbooks.html, single_textbook.html
 ````
 
 TODO
