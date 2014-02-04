@@ -10,12 +10,12 @@ give it a try!
 
 To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage, run
 ````
-$ python dining_hours_scraper.py
+$ python [dining_hours_scraper.py](https://github.com/Goom11/uclaapi/blob/master/dining_hours_scraper.py)
 ````
 
 To generate JSON from the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx), run
 ````
-$ python textbook_scraper.py textbook_html/moar_txtbks.html #or multiple_textbooks.html, single_textbook.html
+$ python [textbook_scraper.py](https://github.com/Goom11/uclaapi/blob/master/textbook_scraper.py) [textbook_html/moar_txtbks.html](https://github.com/Goom11/uclaapi/blob/master/textbook_html/moar_txtbks.html) #or multiple_textbooks.html, single_textbook.html
 ````
 
 TODO
