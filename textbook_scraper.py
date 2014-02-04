@@ -39,7 +39,7 @@ def create_coursedict_from_tag(tag):
                 if ch == 'N':
                     bookdict['new_price'] = float(price.span.text[1:])
                 elif ch == 'U':
-                    bookdict['old_price'] = float(price.span.text[1:])
+                    bookdict['used_price'] = float(price.span.text[1:])
 
             coursedict['books'].append(bookdict)
     except AttributeError:
