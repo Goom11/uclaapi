@@ -26,7 +26,7 @@ $ python dining_hours_scraper.py
 
 To generate JSON from the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx),
 ````
-$ python textbook_scraper.pytextbook_html/moar_txtbks.html #or multiple_textbooks.html, single_textbook.html
+$ python textbook_scraper.py textbook_html/moar_txtbks.html #or multiple_textbooks.html, single_textbook.html
 
 # {'books': [{'SKU': '9780131749207',
 #             'new_price': 35.75,
