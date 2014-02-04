@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import sys
 
-# TODO : handle case where textbooks is only available in new/used
 # TODO : implement save method
 
 def get_tags_from_soup(soup):
@@ -24,7 +23,6 @@ def create_coursedict_from_tag(tag):
     coursedict['instructor'] = str(tag.find('div',
         {"class":"coursenotes"}).text.strip()[11:])
     coursedict['books'] = []
-    print coursedict
     try:
         textbooks = tag.find('ul').find('div', {"class":"Products"}).table.tbody
         textbooks = get_tags_from_soup(textbooks)
@@ -35,8 +33,14 @@ def create_coursedict_from_tag(tag):
                     x.endswith('SKU')).text.strip()[5:])
             prices = book.find('div',
                     {"class":"addcartform"}).find('div').findAll('div')
-            bookdict['new_price'] = float(prices[0].span.text[1:])
-            bookdict['old_price'] = float(prices[1].span.text[1:])
+
+            for price in prices:
+                ch = price.get_text().strip()[0]
+                if ch == 'N':
+                    bookdict['new_price'] = float(price.span.text[1:])
+                elif ch == 'U':
+                    bookdict['old_price'] = float(price.span.text[1:])
+
             coursedict['books'].append(bookdict)
     except AttributeError:
         print "no textbooks found for %r" % coursedict
