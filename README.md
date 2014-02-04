@@ -1,7 +1,7 @@
 uclaapi
 =======
 
-Make it easier for people to make UCLA related apps.
+Making it easier for people to make UCLA related apps.
 
 Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/)
 
