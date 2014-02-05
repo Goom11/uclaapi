@@ -1,4 +1,4 @@
-#from models import *
+from models import *
 from bs4 import BeautifulSoup
 from pprint import pprint
 import sys
@@ -15,6 +15,16 @@ def get_tags_from_soup(soup):
     return tag_list
 
 def save_course(course_dict):
+    course = Course(name=course_dict['course_name'], instructor=course_dict['instructor'])
+    course.save()
+    for book in course_dict['books']:
+        print book
+        textbook = Textbook(title=book['title'], SKU=book['SKU'])
+        if 'used_price' in course_dict:
+            textbook.used_price = book['used_price']
+        if 'new_price' in course_dict:
+            textbook.new_price = book['new_price']
+        textbook.save() 
     return
 
 def create_coursedict_from_tag(tag):
@@ -54,9 +64,9 @@ def main():
     soup = BeautifulSoup((open(sys.argv[1])))
     course_list = get_course_list_from_soup(soup)
     for course in course_list:
-        print ""
-        pprint(create_coursedict_from_tag(course))
-    print ""
+        #print ""
+        save_course(create_coursedict_from_tag(course))
+    #print ""
 
 if __name__ == "__main__":
         main()
