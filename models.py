@@ -10,4 +10,5 @@ class Course(db.Document):
    name = db.StringField(max_length=255, required=True, unique=True)
    instructor = db.StringField(max_length=255, required=True, unique=True)
    books = db.ListField(db.ReferenceField(Textbook))
+   # TODO: override print function for testing
 
