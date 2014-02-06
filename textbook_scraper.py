@@ -15,16 +15,25 @@ def get_tags_from_soup(soup):
     return tag_list
 
 def save_course(course_dict):
-    course = Course(name=course_dict['course_name'], instructor=course_dict['instructor'])
-    course.save()
-    for book in course_dict['books']:
-        print book
-        textbook = Textbook(title=book['title'], SKU=book['SKU'])
-        if 'used_price' in course_dict:
-            textbook.used_price = book['used_price']
-        if 'new_price' in course_dict:
-            textbook.new_price = book['new_price']
-        textbook.save() 
+    # should check to see that only one document was returned?
+
+    course = Course.objects(instructor=course_dict['instructor']).first()
+    if course is not None:
+        # return? update? append books?
+        return
+    else:
+        # create and populate a new course object
+        course = Course(name=course_dict['course_name'], instructor=course_dict['instructor'])
+        course.save()
+        for book in course_dict['books']:
+            textbook = Textbook(title=book['title'], SKU=book['SKU'])
+            if 'used_price' in course_dict:
+                textbook.used_price = book['used_price']
+            if 'new_price' in course_dict:
+                textbook.new_price = book['new_price']
+            textbook.save() 
+            course.books.append(textbook)
+        course.save()
     return
 
 def create_coursedict_from_tag(tag):
@@ -53,7 +62,7 @@ def create_coursedict_from_tag(tag):
 
             coursedict['books'].append(bookdict)
     except AttributeError:
-        print "no textbooks found for %r" % coursedict
+        print "no textbooks found for %s" % coursedict
     return coursedict
 
 def get_course_list_from_soup(soup):
