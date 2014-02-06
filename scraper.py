@@ -20,3 +20,4 @@ for link in soup.find_all("a", { "class" : "main" }):
             soup3 = BeautifulSoup(requests.get(courseDescriptUrl).text)
             for link3 in soup3.find_all("p", { "class" : "coursebody" }):
                 print(link3)
+
