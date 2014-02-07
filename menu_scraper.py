@@ -3,11 +3,11 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 
 
-def left_and_right(table):
-    left = {}
-    right = {}
+def left_or_right(table, index):
+    retval = []
     for tr in table.findAll('tr'):
         tds = tr.findAll('td')
+        retval.append(tds[index])
 
 def main():
     print "hello world"
@@ -20,6 +20,7 @@ def main():
     tables = soup.findAll('table', {"class":"menugridtable"})
     # 0 = Covel, De Neve; 2 = Feast, B-Plate
     lunchmenus = tables[:2] 
+    for table in lunchmenus:
     dinnermenus = tables[2:]
 
 if __name__ == "__main__":
