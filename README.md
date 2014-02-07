@@ -47,5 +47,5 @@ TODO
 * ~~Scrape the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx)~~ DONE!
 * ~~Scrape [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm)~~ DONE!
 * Scrape [dining menus](http://menu.ha.ucla.edu/foodpro/default.asp)
-* Scrape the Registrar
+* Scrape the [Registrar](http://www.registrar.ucla.edu/catalog/catalog-curricul.htm)
 * Sexy versions of all of these
