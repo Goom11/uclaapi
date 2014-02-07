@@ -3,7 +3,7 @@ uclaapi
 
 Making it easier for students to create UCLA-related apps.
 
-Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/)
+Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/), [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/), and [Flask-MongoRest](https://github.com/elasticsales/flask-mongorest)
 
 give it a try!
 =======
