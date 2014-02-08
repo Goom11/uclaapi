@@ -11,6 +11,7 @@ Setting up the virtual environment
 ```
 pip install virtualenv
 virtualenv --distribute venvucla
+source venvucla/bin/activate
 pip install -r requirements.txt
 ```
 
