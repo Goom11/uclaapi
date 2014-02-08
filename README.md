@@ -5,8 +5,19 @@ Making it easier for students to create UCLA-related apps.
 
 Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/).
 
+Setting up the virtual environment
+==================================
+
+```
+pip install virtualenv
+virtualenv --distribute venvucla
+pip install -r requirements.txt
+```
+
+
+
 give it a try!
-=======
+==============
 
 To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage,
 ````
