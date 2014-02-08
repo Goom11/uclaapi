@@ -1,6 +1,6 @@
 from uclaapi import db
 
-# Textbooks/Registrar
+###### Textbooks/Registrar ###### 
 
 class Textbook(db.Document):
    title = db.StringField(max_length=255, required=True)
@@ -10,10 +10,20 @@ class Textbook(db.Document):
 
 class Course(db.Document):
    name = db.StringField(max_length=255, required=True, unique=True)
+   #description
+   department = db.StringField(max_length=255, required=True, unique=True) #eg Math
+   number = db.StringField(max_length=255, required=True, unique=True) #eg 33A
+   quarter = db.StringField(max_length=255, required=True, unique=True) #eg Winter
+   year = db.DecimalField(min_value=0) #eg 2014
    instructor = db.StringField(max_length=255, required=True, unique=True)
    books = db.ListField(db.ReferenceField(Textbook))
+   prerequisites = db.ListField(db.ReferenceField(Course))
 
-# Dining
+# Lecture # subclasses Course, has specific instructor & classroom number?
+
+# Section # subclasses Lecture, has specific TA & classroom number
+
+###### Dining ###### 
 
 class Restaurant(db.Document)
    name = db.StringField(max_length=255, required=True, unique=True)
