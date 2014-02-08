@@ -21,8 +21,9 @@ def main():
                 soup3 = BeautifulSoup(requests.get(courseDescriptUrl).text)
                 for link3 in soup3.find_all("p", {"class": "coursebody"}):
                     print(link3)
-
-
+                    if type(link3) == type(BeautifulSoup('<b></b>').b):
+                        print link3
+                        return
 
 if __name__ == "__main__":
     main()
