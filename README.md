@@ -61,3 +61,4 @@ TODO
 * Scrape [dining menus](http://menu.ha.ucla.edu/foodpro/default.asp)
 * Scrape the [Registrar](http://www.registrar.ucla.edu/catalog/catalog-curricul.htm)
 * Sexy versions of all of these
+* Fix 'argparse'
