@@ -53,6 +53,16 @@ class Food(db.Document):
 class Hours(db.Document):
    date = db.DateTimeField(required=True) 
    # some fancy way to handle varying meal periods and breaks within meal periods
+   # would be cool to use this same model for Library?
+   # this data is going to be repeated a lot though.
+   # perhaps other models should point to this model instead of creating a new
+   # one if this one alreadt exists?
+   # for this model to be useful to meal periods, the relation between meal
+   # periods and and Hours should be bijective? right? because that would allow
+   # for this to be a heurisitic of how many swipes you can use before the
+   # week's over?
+   # then there are things like the library hours which have different hours for
+   # different parts of the library. :/
 
 # unsorted models
 
