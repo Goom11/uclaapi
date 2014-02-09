@@ -54,7 +54,10 @@ class Hours(db.Document):
    date = db.DateTimeField(required=True) 
    # some fancy way to handle varying meal periods and breaks within meal periods
 
-# TODO: model(s) for dining hours
-# TODO: model(s) for dining menus
-# TODO: specify pks / which fields are unique.
-    # how are we going to index at the endpoints?
+# unsorted models
+
+class Building(db.Document):
+    # amenities like room reservations! programatically send emails to reserve rooms lol. 
+
+class Library(db.Document):
+    #hours
