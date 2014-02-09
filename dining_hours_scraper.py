@@ -6,6 +6,7 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 
 def no_slash(date):
+    #return time.split()[0]
     output = ""
     for i in range(len(date)):
         if date[i] == ' ':
