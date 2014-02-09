@@ -60,5 +60,5 @@ TODO
 * ~~Scrape [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm)~~ DONE!
 * Scrape [dining menus](http://menu.ha.ucla.edu/foodpro/default.asp)
 * Scrape the [Registrar](http://www.registrar.ucla.edu/catalog/catalog-curricul.htm)
-* Sexy versions of all of these
+* Scrape [library hours](http://www.library.ucla.edu/about/hours)
 * Fix 'argparse'
