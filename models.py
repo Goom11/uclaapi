@@ -1,3 +1,5 @@
+# TODO: sane defaults for all fields
+
 from uclaapi import db
 
 ###### Textbooks/Registrar ###### 
@@ -21,14 +23,28 @@ class Course(db.Document):
    instructor = db.StringField(max_length=255, required=True, unique=True)
    books = db.ListField(db.ReferenceField(Textbook))
    prerequisites = db.ListField(db.ReferenceField(Course))
+   units = db.DecimalField((min_value=0)
+   # grading detail, GE status, impacted class, enrollment restriction, 
 
 class Lecture(db.Document): # subclasses Course, has specific instructor & classroom number?
    number = db.StringField(max_length=255, required=True, unique=True) #eg 3
    professor = db.ReferenceField(Instructor)
+   location = db.ReferenceField(Room)
+   date_of_final = db.DateTimeField()
+   #time = db.ReferenecField(Hours)
 
 class Section(db.Document): # subclasses Lecture, has specific TA & classroom number
    section = db.StringField(max_length=255, required=True, unique=True) #eg C
    ta = db.ReferenceField(Instructor)
+   location = db.ReferenceField(Room)
+   enrollment = db.IntField((min_value=0)
+   # total enrollment = sum(lecture.section.enrollment)
+   # needs to update itself ridiculously frequently to be useful. perhaps a
+   # separate script will run continuously to update this field. is that fast
+   # enough? given how many classes there are, perhaps we should be running
+   # multiple instances of the script in parallel to be verily up-to-date
+   # hella server load lol
+   #time = db.ReferenecField(Hours)
 
 class Instructor(db.Document):
    first_name = db.StringField(max_length=255)
