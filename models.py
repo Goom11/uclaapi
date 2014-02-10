@@ -64,10 +64,21 @@ class Hours(db.Document):
    # then there are things like the library hours which have different hours for
    # different parts of the library. :/
 
-# unsorted models
+# Buildings
 
 class Building(db.Document):
     # amenities like room reservations! programatically send emails to reserve rooms lol. 
+    name = db.StringField(max_length=255, required=True, unique=True)
+    rooms = db.ListField(db.ReferenceField(Room))
+    #geolocationfield! Flask says it doesn't support this field. does that mean
+    # there's no way we can use it?
+
+class Room(db.Document):
+    number = db.StringField(max_length=255, required=True, unique=True) #eg 2236, A103B
+    # GeoLocationField once we have made svg layovers of each building!
+    # construct these from those little maps in the building
+    max_occupancy = db.IntField(min_value=0)
 
 class Library(db.Document):
     #hours
+
