@@ -53,7 +53,7 @@ class Instructor(db.Document):
 
 ###### Dining ###### 
 
-class Restaurant(db.Document)
+class Restaurant(db.Document):
    name = db.StringField(max_length=255, required=True, unique=True)
    Menus = db.ListField(db.ReferenceField(Menu))
    #Hours = 
