@@ -5,14 +5,8 @@ import urllib2
 from pprint import pprint
 from bs4 import BeautifulSoup
 
-def no_slash(date):
-    #return time.split()[0]
-    output = ""
-    for i in range(len(date)):
-        if date[i] == ' ':
-            return output
-        else:
-            output += date[i]
+def no_slash(time):
+    return time.split()[0]
 
 def plain_text(strong_tag):
     return str(strong_tag.get_text().strip())
