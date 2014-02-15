@@ -9,12 +9,14 @@ class Textbook(db.Document):
     SKU = db.StringField(max_length=255, required=True)
     new_price = db.DecimalField(min_value=0)
     used_price = db.DecimalField(min_value=0)
+   # photo!
 
 class Instructor(db.Document):
    first_name = db.StringField(max_length=255)
    last_name = db.StringField(max_length=255, required=True) 
    # last_name can't be unique b/c multiple profs with same same, 
    # so there needs to be some alternative pk
+   # photo!
    # type = ta|professor # stringfield doesn't seem concrete enough. can we create a data type that only has two values? boolean? what if we want three later on?
 
 class Course(db.Document):
