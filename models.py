@@ -56,14 +56,14 @@ class Lecture(db.Document): # subclasses Course, has specific instructor & class
    date_of_final = db.DateTimeField()
    hours = db.ListField(db.ReferenceField(Hour))
    sections = db.ListField(db.ReferenceField(Section))
-   # USER SUBMITTED PHOTOS, MOTHAFUCKA. (URL? GridFS?)
-   # http://docs.mongodb.org/manual/core/gridfs/ 
 
 ###### Dining ###### 
 
 class Food(db.Document):
     name = db.StringField(max_length=255, required=True, unique=True)
     ingredients = db.ListField(db.StringField(max_length=255))
+   # USER SUBMITTED PHOTOS, MOTHAFUCKA. (URL? GridFS?)
+   # http://docs.mongodb.org/manual/core/gridfs/ 
 
 class Menu(db.Document):
     date = db.DateTimeField(required=True) 
