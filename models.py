@@ -89,3 +89,11 @@ class Library(db.Document):
     name = db.StringField(max_length=255, required=True, unique=True)
     hours = db.ListField(db.ReferenceField(Hour))
 
+#### Student #####
+
+class Student(db.Document):
+    first_name = db.StringField(max_length=255, required=True)
+    last_name = db.StringField(max_length=255, required=True)
+    UID = db.StringField(max_length=255, required=True, unique=True)
+    # courses!
+
