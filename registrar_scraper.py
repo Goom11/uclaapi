@@ -26,6 +26,9 @@ def get_course_dict(course):
     coursedict['description'] = course.get_text().split('\n')[-1]
     return coursedict
 
+def save_course(coursedict):
+    return
+
 def main():
     for link in soup.find_all("a", {"class": "main"}):
         coursetitle = link.contents[0]

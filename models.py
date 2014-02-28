@@ -2,6 +2,14 @@
 
 from uclaapi import db
 
+###### Temporary Models #########
+
+class Temp(db.Document):
+    number = db.StringField(max_length=255, required=True, unique=True)
+    title = db.StringField(max_length=255, required=True, unique=True)
+    description = db.StringField(max_length=255, required=True, unique=True)
+    units = db.IntField(min_value=0)
+
 ###### Textbooks/Registrar ###### 
 
 class Textbook(db.Document):
