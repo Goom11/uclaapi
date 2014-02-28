@@ -18,6 +18,7 @@ def get_course_dict(course):
     coursedict['number'] = str(words[0])
     coursedict['title'] = str(words[1].strip())
     coursedict['units'] = int(re.findall('\d+', words[2])[0])
+    coursedict['description'] = str(course.get_text().split('\n')[2:][0])
     return coursedict
 
 def main():
@@ -34,7 +35,7 @@ def main():
                     if type(link3) == type(BeautifulSoup('<b></b>').b):
                         foo = link3
                         course_dict = get_course_dict(foo)
-                        print course_dict
+                        pprint(course_dict)
                         return
 
 if __name__ == "__main__":
