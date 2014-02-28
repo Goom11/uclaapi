@@ -7,7 +7,7 @@ from uclaapi import db
 class Temp(db.Document):
     number = db.StringField(max_length=255, required=True, unique=True)
     title = db.StringField(max_length=255, required=True, unique=True)
-    description = db.StringField(max_length=255, required=True, unique=True)
+    description = db.StringField(required=True, unique=True)
     units = db.IntField(min_value=0)
 
 ###### Textbooks/Registrar ###### 

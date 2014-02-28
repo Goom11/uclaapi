@@ -1,8 +1,9 @@
 from pymongo import MongoClient
-import requests
 from pprint import pprint
-import re
 from bs4 import BeautifulSoup
+from models import *
+import requests
+import re
 
 client = MongoClient()
 
@@ -27,7 +28,19 @@ def get_course_dict(course):
     return coursedict
 
 def save_course(coursedict):
-    return
+    #clear the database to prevent against pk errors
+    for temp in Temp.objects:
+        temp.delete()
+    number = coursedict['number']
+    description = coursedict['description']
+    title = ''
+    units = 0
+    if 'title' in coursedict:
+        title = coursedict['title']
+    if 'units' in coursedict:
+        units = coursedict['units']
+    temp = Temp(number=number, title=title, description=description, units=units)
+    temp.save()
 
 def main():
     for link in soup.find_all("a", {"class": "main"}):
@@ -44,6 +57,8 @@ def main():
                         foo = link3
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
+                        save_course(course_dict)
+                        return
 
 if __name__ == "__main__":
     main()
