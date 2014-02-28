@@ -16,10 +16,14 @@ def get_course_dict(course):
     title = course.span.text.strip()
     words = title.split('.')
     coursedict['number'] = words[0].strip()
-    coursedict['title'] = ''.join(words[1:-1]).strip()
-    print "WORDS: %r" % words
-    coursedict['units'] = int(re.findall('\d+', words[-1])[0])
-    coursedict['description'] = course.get_text().split('\n')[2:][0]
+    try:
+        coursedict['title'] = ''.join(words[1:-1]).strip()
+        coursedict['units'] = int(re.findall('\d+', words[-1])[0])
+        # TODO: accomodate possible unit ranges (e.g. 2-8)
+    except IndexError:
+        # TODO: accomodate this
+        print "course %r is not formatted correctly" % title
+    coursedict['description'] = course.get_text().split('\n')[-1]
     return coursedict
 
 def main():
@@ -37,7 +41,6 @@ def main():
                         foo = link3
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
-                        #return
 
 if __name__ == "__main__":
     main()
