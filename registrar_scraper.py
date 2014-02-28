@@ -21,7 +21,7 @@ def get_number(title):
     return number #should never happen
 
 def get_title(string):
-    # parse from two chars after first '.' to two characters before first '('
+    # parse from two chars after first '.' until two characters before first '('
     return
 
 def get_course_dict(course):
