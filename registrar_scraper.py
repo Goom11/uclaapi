@@ -11,13 +11,14 @@ r = requests.get(url)
 data = r.text
 soup = BeautifulSoup(data)
 
-def get_title_dict(title):
-    title_dict = {}
+def get_course_dict(course):
+    coursedict = {}
+    title = course.span.text.strip()
     words = title.split('.')
-    title_dict['number'] = str(words[0])
-    title_dict['title'] = str(words[1].strip())
-    title_dict['units'] = int(re.findall('\d+', words[2])[0])
-    return title_dict
+    coursedict['number'] = str(words[0])
+    coursedict['title'] = str(words[1].strip())
+    coursedict['units'] = int(re.findall('\d+', words[2])[0])
+    return coursedict
 
 def main():
     for link in soup.find_all("a", {"class": "main"}):
@@ -32,10 +33,8 @@ def main():
                 for link3 in soup3.find_all("p", {"class": "coursebody"}):
                     if type(link3) == type(BeautifulSoup('<b></b>').b):
                         foo = link3
-                        title = foo.span.get_text().strip()
-                        title_dict = get_title_dict(title)
-                        pprint(title_dict)
-                        course = {}
+                        course_dict = get_course_dict(foo)
+                        print course_dict
                         return
 
 if __name__ == "__main__":
