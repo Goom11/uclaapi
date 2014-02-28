@@ -11,26 +11,14 @@ r = requests.get(url)
 data = r.text
 soup = BeautifulSoup(data)
 
-def get_number(title):
-    number = ''
-    for ch in title:
-        if ch == '.':
-            return number
-        else:
-            number += ch
-    return number #should never happen
-
-def get_title(string):
-    # parse from two chars after first '.' until two characters before first '('
-    return
-
 def get_course_dict(course):
     coursedict = {}
     title = course.span.text.strip()
     words = title.split('.')
-    coursedict['number'] = get_number(title)
-    coursedict['title'] = str(words[1].strip())
-    coursedict['units'] = int(re.findall('\d+', words[2])[0])
+    coursedict['number'] = words[0].strip()
+    coursedict['title'] = ''.join(words[1:-1]).strip()
+    print "WORDS: %r" % words
+    coursedict['units'] = int(re.findall('\d+', words[-1])[0])
     coursedict['description'] = course.get_text().split('\n')[2:][0]
     return coursedict
 
@@ -49,7 +37,7 @@ def main():
                         foo = link3
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
-                        return
+                        #return
 
 if __name__ == "__main__":
     main()
