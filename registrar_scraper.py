@@ -11,14 +11,23 @@ r = requests.get(url)
 data = r.text
 soup = BeautifulSoup(data)
 
+def get_number(title):
+    number = ''
+    for ch in title:
+        if ch == '.':
+            return number
+        else:
+            number += ch
+    return number #should never happen
+
 def get_course_dict(course):
     coursedict = {}
     title = course.span.text.strip()
     words = title.split('.')
-    coursedict['number'] = str(words[0])
+    coursedict['number'] = get_number(title)
     coursedict['title'] = str(words[1].strip())
     coursedict['units'] = int(re.findall('\d+', words[2])[0])
-    coursedict['description'] = str(course.get_text().split('\n')[2:][0])
+    coursedict['description'] = course.get_text().split('\n')[2:][0]
     return coursedict
 
 def main():
