@@ -45,7 +45,7 @@ def save_course(coursedict):
     temp = Temp(number=number, title=title, description=description, units=units)
     temp.save()
 
-def get_course_list():
+def get_course_list(max_length = -1):
 
     course_list = []
 
@@ -64,14 +64,14 @@ def get_course_list():
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
                         course_list.append(course_dict)
-                        #save_course(course_dict)
-                        #return
+                        if max_length > 1 and len(course_list) is max_length:
+                            return course_list
     return course_list
 
 def main():
 
     clear_db()
-    course_list = get_course_list()
+    course_list = get_course_list(5)
     print "retrieved %i courses" % len(course_list)
     
 if __name__ == "__main__":
