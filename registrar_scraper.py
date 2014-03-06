@@ -27,10 +27,13 @@ def get_course_dict(course):
     coursedict['description'] = course.get_text().split('\n')[-1]
     return coursedict
 
-def save_course(coursedict):
+def clear_db():
     #clear the database to prevent against pk errors
     for temp in Temp.objects:
         temp.delete()
+        print "deleted %s: %s" % (temp.number, temp.title)
+
+def save_course(coursedict):
     number = coursedict['number']
     description = coursedict['description']
     title = ''
@@ -42,7 +45,10 @@ def save_course(coursedict):
     temp = Temp(number=number, title=title, description=description, units=units)
     temp.save()
 
-def main():
+def get_course_list():
+
+    course_list = []
+
     for link in soup.find_all("a", {"class": "main"}):
         coursetitle = link.contents[0]
         intourl = 'http://www.registrar.ucla.edu/catalog/' + link.get('href')
@@ -57,8 +63,16 @@ def main():
                         foo = link3
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
-                        save_course(course_dict)
-                        return
+                        course_list.append(course_dict)
+                        #save_course(course_dict)
+                        #return
+    return course_list
 
+def main():
+
+    clear_db()
+    course_list = get_course_list()
+    print "retrieved %i courses" % len(course_list)
+    
 if __name__ == "__main__":
     main()

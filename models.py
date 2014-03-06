@@ -5,8 +5,8 @@ from uclaapi import db
 ###### Temporary Models #########
 
 class Temp(db.Document):
-    number = db.StringField(max_length=255, required=True, unique=True)
-    title = db.StringField(max_length=255, required=True, unique=True)
+    number = db.StringField(max_length=255, required=True)
+    title = db.StringField(max_length=255, required=True)
     description = db.StringField(required=True, unique=True)
     units = db.IntField(min_value=0)
 
