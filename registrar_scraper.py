@@ -3,6 +3,7 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 from models import *
 import requests
+import sys
 import re
 
 client = MongoClient()
@@ -44,6 +45,7 @@ def save_course(coursedict):
         units = coursedict['units']
     temp = Temp(number=number, title=title, description=description, units=units)
     temp.save()
+    print "SAVED %s ..." % description[:50]
 
 def get_course_list(max_length = -1):
 
@@ -71,8 +73,13 @@ def get_course_list(max_length = -1):
 def main():
 
     clear_db()
-    course_list = get_course_list(5)
+    length = -1
+    if len(sys.argv) > 1:
+        length = int(sys.argv[1])
+    course_list = get_course_list(length)
     print "retrieved %i courses" % len(course_list)
+    for course in course_list:
+        save_course(course)
     
 if __name__ == "__main__":
     main()
