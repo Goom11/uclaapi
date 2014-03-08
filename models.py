@@ -2,14 +2,6 @@
 
 from uclaapi import db
 
-###### FOR TESTING ONLY #########
-
-class Temp(db.Document):
-    description = db.StringField(required=True)
-    number = db.StringField(max_length=255, required=True)
-    title = db.StringField(max_length=255, required=True)
-    units = db.IntField(min_value=0)
-
 ###### Textbooks/Registrar ###### 
 
 class Textbook(db.Document):
@@ -29,17 +21,17 @@ class Instructor(db.Document):
 
 class Course(db.Document):
     # TODO: parse 'name' to separate fields!
-    name = db.StringField(max_length=255, required=True, unique=True)
+    title = db.StringField(max_length=255, required=True)
     description = db.StringField(required=True)
-    department = db.StringField(max_length=255, required=True, unique=True) 
-    number = db.StringField(max_length=255, required=True, unique=True)
-    quarter = db.StringField(max_length=255, required=True, unique=True) 
+    department = db.StringField(max_length=255) 
+    number = db.StringField(max_length=255, required=True)
+    quarter = db.StringField(max_length=255) 
     year = db.DecimalField(min_value=0) 
     # TODO: move instructor to lecture
-    instructor = db.StringField(max_length=255, required=True, unique=True)
+    instructor = db.StringField(max_length=255)
     books = db.ListField(db.ReferenceField(Textbook))
     #prerequisites = db.ListField(db.ReferenceField(Course))
-    units = db.DecimalField(min_value=0)
+    units = db.IntField(min_value=0)
     # grading detail, GE status, impacted class, enrollment restriction, 
 
 class Room(db.Document):

@@ -30,9 +30,9 @@ def get_course_dict(course):
 
 def clear_db():
     #clear the database to prevent against pk errors
-    for temp in Temp.objects:
-        temp.delete()
-        print "deleted %s: %s" % (temp.number, temp.title)
+    for course in Course.objects:
+        course.delete()
+        print "deleted %s: %s" % (course.number, course.title)
 
 def save_course(coursedict):
     number = coursedict['number']
@@ -43,8 +43,17 @@ def save_course(coursedict):
         title = coursedict['title']
     if 'units' in coursedict:
         units = coursedict['units']
-    temp = Temp(number=number, title=title, description=description, units=units)
-    temp.save()
+    
+    # fuck it, it's a hackathon
+    department = "DEPT"
+    quarter = "QTR"
+    instructor = "PROF"
+
+    course = Course(number=number, title=title, description=description, units=units, department=department, quarter=quarter, instructor=instructor)
+    #course = Course(number=number, title=title, description=description, units=units)
+    course.save()
+    # temp = Temp(number=number, title=title, description=description, units=units)
+    # temp.save()
     print "SAVED %s ..." % description[:50]
 
 def get_course_list(max_length = -1):
@@ -66,7 +75,7 @@ def get_course_list(max_length = -1):
                         course_dict = get_course_dict(foo)
                         pprint(course_dict)
                         course_list.append(course_dict)
-                        if max_length > 1 and len(course_list) is max_length:
+                        if max_length > 0 and len(course_list) is max_length:
                             return course_list
     return course_list
 

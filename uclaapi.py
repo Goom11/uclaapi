@@ -19,14 +19,16 @@ def getDict(inputObj, fields):
     return result
 
 
-@app.route('/temp')
-def myfunc():
+@app.route('/api/v1/courses')
+def get_course_list():
     fields = ['title', 'units', 'description', 'number']
-    result = [getDict(temp, fields) for temp in Temp.objects]
+    result = [getDict(course, fields) for course in Course.objects]
+    print result
     return json.dumps(result)
 
 
 @app.route('/')
+# TODO: list all endpoints
 def home():
     temps = Temp.objects
     string = ""
