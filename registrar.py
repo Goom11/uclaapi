@@ -17,6 +17,7 @@ soup = BeautifulSoup(data)
 
 def get_course_dict(course):
     coursedict = {}
+    pprint(course)
     title = course.span.text.strip()
     words = title.split('.')
     coursedict['number'] = words[0].strip()
@@ -76,7 +77,7 @@ def get_course_list(max_length = -1):
                     if type(link3) == type(BeautifulSoup('<b></b>').b):
                         foo = link3
                         course_dict = get_course_dict(foo)
-                        pprint(course_dict)
+                        #pprint(course_dict)
                         course_list.append(course_dict)
                         if max_length > 0 and len(course_list) is max_length:
                             return course_list
@@ -84,7 +85,10 @@ def get_course_list(max_length = -1):
 
 def postCourse(course):
     url = "http://127.0.0.1:5000/courses"
-    course['description'] = course['description'].encode('ascii', 'replace')
+    #ugh should do this with a dict comprehension or map or something :/
+    course['title'] = course['title'].encode('ascii', 'ignore')
+    course['number'] = course['number'].encode('ascii', 'ignore')
+    course['description'] = course['description'].encode('ascii', 'ignore')
     data = urllib.urlencode(course)
     req = urllib2.Request(url, data)
     response = urllib2.urlopen(req)
