@@ -34,7 +34,6 @@ def home():
 def get_course_list():
     fields = ['title', 'units', 'description', 'number']
     result = [getDict(course, fields) for course in Course.objects]
-    print result
     return json.dumps(result)
 
 
