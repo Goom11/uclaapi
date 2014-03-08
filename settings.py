@@ -8,6 +8,10 @@ schema = {
         'type': 'string',
         'maxlength': 255,
     },
+    'department': {
+        'type': 'string',
+        'maxlength': 255,
+    },
     'description': {
         'type': 'string',
         #'maxlength': 255,

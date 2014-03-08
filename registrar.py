@@ -38,7 +38,6 @@ def get_course_list(max_length = -1):
     for link in soup.find_all("a", {"class": "main"}):
         coursetitle = link.contents[0]
         intourl = 'http://www.registrar.ucla.edu/catalog/' + link.get('href')
-        # print(url + "/" + link.get('href') + "\n" + coursetitle)
         soup2 = BeautifulSoup(requests.get(intourl).text)
         for link2 in soup2.find_all("a", {"class": "nav-landing-menu"}):
             if 'Course Listings' in link2.contents[0]:
@@ -48,6 +47,7 @@ def get_course_list(max_length = -1):
                     if type(link3) == type(BeautifulSoup('<b></b>').b):
                         foo = link3
                         course_dict = get_course_dict(foo)
+                        course_dict['department'] = link.text.encode('ascii')
                         #pprint(course_dict)
                         course_list.append(course_dict)
                         if max_length > 0 and len(course_list) is max_length:
