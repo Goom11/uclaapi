@@ -1,16 +1,40 @@
 import os
+import json
+import datetime
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
+from flask.ext.mongorest import MongoRest
 
 app = Flask(__name__)
 app.config["MONGODB_SETTINGS"] = {'DB': 'uclaapi_test'}
 app.config["SECRET_KEY"] = "KeepThisS3cr3t"
 
 db = MongoEngine(app)
+api = MongoRest(app)
+
+from models import *
+
+def getDict(inputObj, fields):
+    obj = inputObj.__dict__['_data']
+    fields = [(field, obj[field]) for field in fields if field in obj]
+    result = {key: value for (key, value) in fields}
+    return result
+
+
+@app.route('/temp')
+def myfunc():
+    fields = ['title', 'units', 'description', 'number']
+    result = [getDict(temp, fields) for temp in Temp.objects]
+    return json.dumps(result)
 
 
 @app.route('/')
 def home():
+    temps = Temp.objects
+    string = ""
+    for temp in temps:
+        string += temp.title + '\n'
+    return string
     return 'hello werld'
 
 

@@ -1,14 +1,26 @@
 # TODO: sane defaults for all fields
 
 from uclaapi import db
+from uclaapi import api
+from flask.ext.mongorest.views import ResourceView
+from flask.ext.mongorest.resources import Resource
+from flask.ext.mongorest import methods
 
-###### Temporary Models #########
+###### FOR TESTING ONLY #########
 
 class Temp(db.Document):
+    description = db.StringField(required=True)
     number = db.StringField(max_length=255, required=True)
     title = db.StringField(max_length=255, required=True)
-    description = db.StringField(required=True, unique=True)
     units = db.IntField(min_value=0)
+
+class TempResource(Resource):
+    document = Temp
+
+@api.register(name='temp', url='/temp/')
+class TempView(ResourceView):
+    resource = TempResource
+    methods = [methods.Fetch, methods.List]
 
 ###### Textbooks/Registrar ###### 
 
