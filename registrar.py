@@ -31,35 +31,6 @@ def get_course_dict(course):
     coursedict['description'] = course.get_text().split('\n')[-1]
     return coursedict
 
-def clear_db():
-    #clear the database to prevent against pk errors
-
-
-    return
-    for course in Course.objects:
-        course.delete()
-        print "deleted %s: %s" % (course.number, course.title)
-
-def save_course(coursedict):
-    number = coursedict['number']
-    description = coursedict['description']
-    title = ''
-    units = 0
-    if 'title' in coursedict:
-        title = coursedict['title']
-    if 'units' in coursedict:
-        units = coursedict['units']
-
-    
-    # fuck it, it's a hackathon
-    department = "DEPT"
-    quarter = "QTR"
-    instructor = "PROF"
-
-    course = Course(number=number, title=title, description=description, units=units, department=department, quarter=quarter, instructor=instructor)
-    course.save()
-    print "SAVED %s ..." % description[:50]
-
 def get_course_list(max_length = -1):
 
     course_list = []
@@ -97,14 +68,12 @@ def postCourse(course):
 
 def main():
 
-    clear_db()
     length = -1
     if len(sys.argv) > 1:
         length = int(sys.argv[1])
     course_list = get_course_list(length)
     print "retrieved %i courses" % len(course_list)
     for course in course_list:
-        #save_course(course)
         postCourse(course)
     
 if __name__ == "__main__":
