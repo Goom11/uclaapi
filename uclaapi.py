@@ -19,14 +19,6 @@ def getDict(inputObj, fields):
     return result
 
 
-@app.route('/api/v1/courses')
-def get_course_list():
-    fields = ['title', 'units', 'description', 'number']
-    result = [getDict(course, fields) for course in Course.objects]
-    print result
-    return json.dumps(result)
-
-
 @app.route('/')
 # TODO: list all endpoints
 def home():
@@ -38,9 +30,12 @@ def home():
     return 'hello werld'
 
 
-@app.route('/api/v1/classes')
-def get_class_list():
-    return 'classes'
+@app.route('/api/v1/courses')
+def get_course_list():
+    fields = ['title', 'units', 'description', 'number']
+    result = [getDict(course, fields) for course in Course.objects]
+    print result
+    return json.dumps(result)
 
 
 @app.route('/api/v1/classes/<int:class_id>')
