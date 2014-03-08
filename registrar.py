@@ -3,6 +3,8 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 from models import *
 import requests
+import urllib
+import urllib2
 import sys
 import re
 
@@ -30,6 +32,9 @@ def get_course_dict(course):
 
 def clear_db():
     #clear the database to prevent against pk errors
+
+
+    return
     for course in Course.objects:
         course.delete()
         print "deleted %s: %s" % (course.number, course.title)
@@ -43,6 +48,7 @@ def save_course(coursedict):
         title = coursedict['title']
     if 'units' in coursedict:
         units = coursedict['units']
+
     
     # fuck it, it's a hackathon
     department = "DEPT"
@@ -50,10 +56,7 @@ def save_course(coursedict):
     instructor = "PROF"
 
     course = Course(number=number, title=title, description=description, units=units, department=department, quarter=quarter, instructor=instructor)
-    #course = Course(number=number, title=title, description=description, units=units)
     course.save()
-    # temp = Temp(number=number, title=title, description=description, units=units)
-    # temp.save()
     print "SAVED %s ..." % description[:50]
 
 def get_course_list(max_length = -1):
@@ -79,6 +82,15 @@ def get_course_list(max_length = -1):
                             return course_list
     return course_list
 
+def postCourse(course):
+    url = "http://127.0.0.1:5000/courses"
+    course['description'] = course['description'].encode('ascii', 'replace')
+    data = urllib.urlencode(course)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print the_page
+
 def main():
 
     clear_db()
@@ -88,7 +100,8 @@ def main():
     course_list = get_course_list(length)
     print "retrieved %i courses" % len(course_list)
     for course in course_list:
-        save_course(course)
+        #save_course(course)
+        postCourse(course)
     
 if __name__ == "__main__":
     main()
