@@ -1,1 +1,1 @@
-web: gunicorn uclaapi:app
+web: gunicorn run:app
