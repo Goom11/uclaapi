@@ -1,14 +1,14 @@
-from pymongo import MongoClient
+#from pymongo import MongoClient
 from pprint import pprint
 from bs4 import BeautifulSoup
-from models import *
+#from models import *
 import requests
 import urllib
 import urllib2
 import sys
 import re
 
-client = MongoClient()
+#client = MongoClient()
 
 url = 'http://www.registrar.ucla.edu/catalog/catalog-curricul.htm'
 r = requests.get(url)

@@ -2,13 +2,13 @@ import os
 import json
 import datetime
 from flask import Flask
-from flask.ext.mongoengine import MongoEngine
+#from flask.ext.mongoengine import MongoEngine
 
 app = Flask(__name__)
 app.config["MONGODB_SETTINGS"] = {'DB': 'uclaapi_test'}
 app.config["SECRET_KEY"] = "KeepThisS3cr3t"
 
-db = MongoEngine(app)
+#db = MongoEngine(app)
 
 from models import *
 
