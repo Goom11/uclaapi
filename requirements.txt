@@ -11,3 +11,4 @@ gunicorn==18.0
 itsdangerous==0.23
 requests==2.2.1
 wsgiref==0.1.2
+Eve==0.3
