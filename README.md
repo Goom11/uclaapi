@@ -3,8 +3,6 @@ uclaapi
 
 Making it easier for students to create UCLA-related apps.
 
-Using [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [Flask-MongoEngine](https://flask-mongoengine.readthedocs.org/en/latest/).
-
 Setting up the virtual environment
 ==================================
 
@@ -14,8 +12,6 @@ virtualenv --distribute venvucla
 source venvucla/bin/activate
 pip install -r requirements.txt
 ```
-
-
 
 give it a try!
 ==============
