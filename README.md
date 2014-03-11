@@ -25,7 +25,7 @@ $ mongod              # in another window
 $ python run.py       # in another window
 $ python registrar.py # this will populate the database and will take a minute or so
 ````
-Go to http://localhost:5000/courses to enjoy the fruits of your labor!
+Go to [http://localhost:5000/courses](http://localhost:5000/courses) to enjoy the fruits of your labor! We reccomend using [Postman](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop) to interact with this RESTful API.
 
 To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage,
 ````
