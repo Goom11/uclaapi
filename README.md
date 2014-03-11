@@ -7,6 +7,8 @@ Setting up the virtual environment
 ==================================
 
 ```
+git clone https://github.com/Goom11/uclaapi.git
+cd uclaapi
 pip install virtualenv
 virtualenv --distribute venvucla
 source venvucla/bin/activate
@@ -15,6 +17,15 @@ pip install -r requirements.txt
 
 give it a try!
 ==============
+
+To populate and run the registar API server,
+````
+# if for any command you receive an ImportError, be sure that you've sourced the virtual environment
+$ mongod              # in another window
+$ python run.py       # in another window
+$ python registrar.py # this will populate the database and will take a minute or so
+````
+Go to http://localhost:5000/courses to enjoy the fruits of your labor!
 
 To generate JSON from the [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm) webpage,
 ````
