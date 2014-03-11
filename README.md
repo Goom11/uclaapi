@@ -3,7 +3,7 @@ uclaapi
 
 Making it easier for students to create UCLA-related apps.
 
-Setting up the virtual environment
+getting started
 ==================================
 
 ```
