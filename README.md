@@ -1,7 +1,7 @@
 uclaapi
 =======
 
-Making it easier for students to create UCLA-related apps.
+Fostering the UCLA app ecosystem.
 
 getting started
 ==================================
