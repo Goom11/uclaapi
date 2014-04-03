@@ -50,13 +50,13 @@ def get_course_status(course_url):
   print '======================='
 
 def main():
-    print "sane"
-    return
     soup = get_soup(BASE + 'schedulehome.aspx')
     values = get_values(soup)
-    terms = values[0:5]
-    depts = values[5:]
-    
+    terms = values[0:4]
+    depts = values[4:]
+    print terms
+    print depts
+    return
     winter = terms[1]
     dept_urls = [get_dept_url(winter, dept) for dept in depts]
     
