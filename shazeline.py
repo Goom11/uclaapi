@@ -1,7 +1,5 @@
-/*
-COURTESY OF Shahid Chohan
-https://github.com/shazeline
-*/
+# COURTESY OF Shahid Chohan
+# https://github.com/shazeline
 
 import re
 import requests
@@ -51,15 +49,21 @@ def get_course_status(course_url):
           enrollment_data[row][13]
   print '======================='
 
-soup = get_soup(BASE + 'schedulehome.aspx')
-values = get_values(soup)
-terms = values[0:5]
-depts = values[5:]
+def main():
+    print "sane"
+    return
+    soup = get_soup(BASE + 'schedulehome.aspx')
+    values = get_values(soup)
+    terms = values[0:5]
+    depts = values[5:]
+    
+    winter = terms[1]
+    dept_urls = [get_dept_url(winter, dept) for dept in depts]
+    
+    for i, dept_url in enumerate(dept_urls):
+      course_urls = get_all_course_urls(winter, depts[i], dept_url)
+      for course_url in course_urls:
+        get_course_status(course_url)
 
-winter = terms[1]
-dept_urls = [get_dept_url(winter, dept) for dept in depts]
-
-for i, dept_url in enumerate(dept_urls):
-  course_urls = get_all_course_urls(winter, depts[i], dept_url)
-  for course_url in course_urls:
-    get_course_status(course_url)
+if __name__ == "__main__":
+    main()
