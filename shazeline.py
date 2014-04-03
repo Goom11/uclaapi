@@ -54,14 +54,11 @@ def main():
     values = get_values(soup)
     terms = values[0:4]
     depts = values[4:]
-    print terms
-    print depts
-    return
-    winter = terms[1]
-    dept_urls = [get_dept_url(winter, dept) for dept in depts]
+    spring = terms[0]
+    dept_urls = [get_dept_url(spring, dept) for dept in depts]
     
     for i, dept_url in enumerate(dept_urls):
-      course_urls = get_all_course_urls(winter, depts[i], dept_url)
+      course_urls = get_all_course_urls(spring, depts[i], dept_url)
       for course_url in course_urls:
         get_course_status(course_url)
 
