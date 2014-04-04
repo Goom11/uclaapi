@@ -35,14 +35,22 @@ def parse_table(table):
     data.append(row_data)
   return data
 
+def get_ID(course_url):
+    soup = get_soup(course_url)
+    try:
+        ID = soup.find_all('td', {"class" : "dgdClassDataColumnIDNumber"})[0].get_text().strip()
+    except IndexError:
+        print "index error at %s" % course_url
+        return
+    if ID != "Crs Info":
+        return str(ID)
+
 def get_course_status(course_url):
-  soup = get_soup(course_url)
   tables = soup.find_all('table')
   if len(tables) < 8:
     return
   enrollment_table = tables[8]
   enrollment_data = parse_table(enrollment_table)
-  print course_url
   for row in range(1, len(enrollment_data)):
     print enrollment_data[row][1] + ' ' + \
           enrollment_data[row][2] + ':\t' + \
@@ -56,11 +64,27 @@ def main():
     depts = values[4:]
     spring = terms[0]
     dept_urls = [get_dept_url(spring, dept) for dept in depts]
-    
+
+    IDs = []
+
+    i = 0
     for i, dept_url in enumerate(dept_urls):
-      course_urls = get_all_course_urls(spring, depts[i], dept_url)
-      for course_url in course_urls:
-        get_course_status(course_url)
+        course_urls = get_all_course_urls(spring, depts[i], dept_url)
+        for course_url in course_urls:
+            #get_course_status(course_url)
+            ID = get_ID(course_url)
+            if ID is not None:
+                print "adding %r" % ID
+                IDs.append(ID)
+
+    print IDs
+
+    f = open('real_section_ids.txt', 'w')
+    for ID in IDs:
+        print "writing %r" % ID
+        f.write('%s\n' % ID)        
+    f.close
+
 
 if __name__ == "__main__":
     main()
