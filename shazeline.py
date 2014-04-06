@@ -36,15 +36,17 @@ def parse_table(table):
     data.append(row_data)
   return data
 
-def get_ID(course_url):
-    soup = get_soup(course_url)
-    try:
-        ID = soup.find_all('td', {"class" : "dgdClassDataColumnIDNumber"})[0].get_text().strip()
-    except IndexError:
-        print "index error at %s" % course_url
-        return
-    if ID != "Crs Info":
-        return str(ID)
+def get_IDs(course_url):
+  soup = get_soup(course_url)
+  matches = soup.find_all(class_='dgdClassDataColumnIDNumber')
+  raw_urls = [str(match) for match in matches if 'bold' in str(match) and '?srs=' in str(match)]
+  ids = []
+  # put regex here later
+  for link in raw_urls:
+    equals_index = link.find('?srs=')
+    id = link[equals_index+5:equals_index+14]
+    ids.append(id)
+  return ids
 
 def get_course_status(course_url):
   tables = soup.find_all('table')
@@ -59,30 +61,33 @@ def get_course_status(course_url):
   print '======================='
 
 def get_course_url_list():
-    soup = get_soup(BASE + 'schedulehome.aspx')
-    values = get_values(soup)
-    terms = values[0:4]
-    depts = values[4:]
-    spring = terms[0]
-    dept_urls = [get_dept_url(spring, dept) for dept in depts]
-    for i, dept_url in enumerate(dept_urls):
-        course_urls = get_all_course_urls(spring, depts[i], dept_url)
-    return course_urls
+  soup = get_soup(BASE + 'schedulehome.aspx')
+  values = get_values(soup)
+  terms = values[0:4]
+  depts = values[4:]
+  spring = terms[0]
+  dept_urls = [get_dept_url(spring, dept) for dept in depts]
+  all_urls = []
+  for i, dept_url in enumerate(dept_urls):
+    course_urls = get_all_course_urls(spring, depts[i], dept_url)
+    all_urls += course_urls
+  return all_urls
 
 def print_ids_to_file():
-    course_urls = get_course_url_list()
-
-    for course_url in course_urls:
-        #get_course_status(course_url)
-        ID = get_ID(course_url)
-        if ID is not None:
-            print "adding %r" % ID
-            IDs.append(ID)
+  course_urls = get_course_url_list()
+  all_ids = []
+  for course_url in course_urls:
+    print course_url
+    IDs = get_IDs(course_url)
+    for ID in IDs:
+      if ID is not None:
+        print "adding %r" % ID
+        all_ids.append(ID)
 
     f = open(ID_FILE, 'w')
-    for ID in IDs:
+    for ID in all_ids:
         print "writing %r" % ID
-        f.write('%s\n' % ID)        
+        f.write('%s\n' % ID)
     f.close
 
 def main():
