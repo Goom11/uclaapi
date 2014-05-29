@@ -1,4 +1,11 @@
-#TODO: add requireds
+#RESOURCE_METHODS = ['GET']
+#ITEM_METHODS = []
+#RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
+#ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
+#X_DOMAINS = '*'
+
+SERVER_NAME = '127.0.0.1:8000'
+
 schema = {
     'title': {
         'type': 'string',
@@ -27,5 +34,3 @@ DOMAIN = {
     'courses': courses,
 }
 
-RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
-ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']

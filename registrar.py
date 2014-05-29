@@ -17,7 +17,7 @@ soup = BeautifulSoup(data)
 
 def get_course_dict(course):
     coursedict = {}
-    pprint(course)
+    #pprint(course)
     title = course.span.text.strip()
     words = title.split('.')
     coursedict['number'] = words[0].strip()
@@ -54,6 +54,12 @@ def get_course_list(max_length = -1):
                             return course_list
     return course_list
 
+def make_clean(course):
+    course['title'] = course['title'].encode('ascii', 'replace')
+    course['number'] = course['number'].encode('ascii', 'replace')
+    course['description'] = course['description'].encode('ascii', 'replace')
+    return course
+
 def postCourse(course):
     url = "http://127.0.0.1:5000/courses"
     #ugh should do this with a dict comprehension or map or something :/
@@ -72,9 +78,31 @@ def main():
     if len(sys.argv) > 1:
         length = int(sys.argv[1])
     course_list = get_course_list(length)
-    print "retrieved %i courses" % len(course_list)
+    print "retrieved %i courses" % len(course_list) 
+
+    new_list = []
+    for i, course in enumerate(course_list):
+        course = make_clean(course)
+        name = "%s %s: %s" % (course['department'], course['number'], course['title'])
+        new_list.append(name)
+    print new_list
+    return
+
+    new_list = []
+    for i, course in enumerate(course_list):
+        course = make_clean(course)
+        name = "%s %s: %s" % (course['department'], course['number'], course['title'])
+        new_list.append({"name":name, "id":i})
+    print new_list
+    
+    return
     for course in course_list:
-        postCourse(course)
+        clean = make_clean(course)
+        print "%s %s: %s" % (course['department'], course['number'], course['title'])
+    return 
+    for course in course_list:
+        #postCourse(course)
+        pprint(course)
     
 if __name__ == "__main__":
     main()
