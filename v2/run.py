@@ -22,6 +22,9 @@ api = MongoRest(app)
 
 class Course(db.Document):
     title = db.StringField()
+    number = db.StringField()
+    department = db.StringField()
+    description = db.StringField()
 
 class CourseResource(Resource):
     document = Course
