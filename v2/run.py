@@ -28,6 +28,9 @@ class Course(db.Document):
 
 class CourseResource(Resource):
     document = Course
+    filters = {
+        'number': [ops.Exact]
+    }
 
 @api.register(name='course', url='/course/')
 class CourseView(ResourceView):
@@ -37,6 +40,4 @@ class CourseView(ResourceView):
 
 if __name__ == '__main__':
     app.run()
-    #port = int(os.environ.get('PORT', 8000))
-    #app.run(host='0.0.0.0', port=port)
 
