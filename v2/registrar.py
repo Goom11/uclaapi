@@ -54,12 +54,6 @@ def get_course_list(max_length = -1):
                             return course_list
     return course_list
 
-def make_clean(course):
-    course['title'] = course['title'].encode('ascii', 'replace')
-    course['number'] = course['number'].encode('ascii', 'replace')
-    course['description'] = course['description'].encode('ascii', 'replace')
-    return course
-
 def postCourse(course):
     url = "http://127.0.0.1:5000/course/"
     response = unirest.post(url, headers={'Accept':'application/json', 'Content-Type': 'application-json'}, params=json.dumps(course))
