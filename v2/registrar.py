@@ -1,8 +1,8 @@
-#from pymongo import MongoClient
 from pprint import pprint
 from bs4 import BeautifulSoup
-#from models import *
+import unirest
 import requests
+import json
 import urllib
 import urllib2
 import sys
@@ -61,16 +61,8 @@ def make_clean(course):
     return course
 
 def postCourse(course):
-    url = "http://127.0.0.1:5000/courses"
-    #ugh should do this with a dict comprehension or map or something :/
-    course['title'] = course['title'].encode('ascii', 'replace')
-    course['number'] = course['number'].encode('ascii', 'replace')
-    course['description'] = course['description'].encode('ascii', 'replace')
-    data = urllib.urlencode(course)
-    req = urllib2.Request(url, data)
-    response = urllib2.urlopen(req)
-    the_page = response.read()
-    print the_page
+    url = "http://127.0.0.1:5000/course/"
+    response = unirest.post(url, headers={'Accept':'application/json', 'Content-Type': 'application-json'}, params=json.dumps(course))
 
 def main():
 
@@ -78,31 +70,12 @@ def main():
     if len(sys.argv) > 1:
         length = int(sys.argv[1])
     course_list = get_course_list(length)
-    print "retrieved %i courses" % len(course_list) 
+    print "retrieved %i courses" % len(course_list)
 
-    new_list = []
-    for i, course in enumerate(course_list):
-        course = make_clean(course)
-        name = "%s %s: %s" % (course['department'], course['number'], course['title'])
-        new_list.append(name)
-    print new_list
-    return
-
-    new_list = []
-    for i, course in enumerate(course_list):
-        course = make_clean(course)
-        name = "%s %s: %s" % (course['department'], course['number'], course['title'])
-        new_list.append({"name":name, "id":i})
-    print new_list
-    
-    return
     for course in course_list:
-        clean = make_clean(course)
-        print "%s %s: %s" % (course['department'], course['number'], course['title'])
-    return 
-    for course in course_list:
-        #postCourse(course)
+        postCourse(course)
         pprint(course)
-    
+
+    print "DONE"
 if __name__ == "__main__":
     main()
