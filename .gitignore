@@ -1,4 +1,5 @@
 *.pyc
 venvucla
+venv
 *~
 *.swp
