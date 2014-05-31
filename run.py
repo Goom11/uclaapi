@@ -1,4 +1,5 @@
 import os
+from mongoengine import connect
 
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
@@ -11,10 +12,13 @@ from flask.ext.mongorest import methods
 app = Flask(__name__)
 app.debug = True
 
-app.config.update(
-    MONGODB_HOST = 'localhost',
-    MONGODB_PORT = '27017',
-    MONGODB_DB = 'chimera',
+app.config["MONGODB_DB"] = 'app25845098'
+connect(
+        'app25845098',
+        username='heroku',
+        password='a614e68b445d0d9d1c375740781073b4',
+        host='mongodb://lowell:bander@kahana.mongohq.com:10090/app25845098',
+        port=10090
 )
 
 db = MongoEngine(app)
