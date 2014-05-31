@@ -28,7 +28,7 @@ api = MongoRest(app)
 
 @app.route('/')
 def index():
-    return render_template('cover.html')
+    return render_template('index.html')
 
 class Course(db.Document):
     title = db.StringField()
