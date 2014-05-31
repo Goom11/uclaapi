@@ -35,6 +35,7 @@ class Course(db.Document):
     number = db.StringField()
     department = db.StringField()
     description = db.StringField()
+    units = db.IntField()
 
 class CourseResource(Resource):
     document = Course
