@@ -9,6 +9,8 @@ from flask.ext.mongorest.resources import Resource
 from flask.ext.mongorest import operators as ops
 from flask.ext.mongorest import methods
 
+from flask import render_template
+
 app = Flask(__name__)
 app.debug = True
 
@@ -23,6 +25,10 @@ connect(
 
 db = MongoEngine(app)
 api = MongoRest(app)
+
+@app.route('/')
+def index():
+    return render_template('cover.html')
 
 class Course(db.Document):
     title = db.StringField()
