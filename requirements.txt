@@ -6,6 +6,7 @@ Flask-Views==0.2.1
 Flask-WTF==0.9.4
 Jinja2==2.7.2
 MarkupSafe==0.18
+Unirest==1.1.6
 WTForms==1.0.5
 Werkzeug==0.9.4
 argparse==1.2.1
@@ -15,6 +16,7 @@ gunicorn==18.0
 itsdangerous==0.23
 mimerender==0.5.4
 mongoengine==0.8.7
+poster==0.8.1
 pymongo==2.6.3
 python-dateutil==2.2
 python-mimeparse==0.1.4
