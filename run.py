@@ -40,7 +40,8 @@ class Course(db.Document):
 class CourseResource(Resource):
     document = Course
     filters = {
-        'number': [ops.Exact]
+        'number': [ops.Exact, ops.Contains],
+        'department': [ops.Exact, ops.Contains],
     }
 
 @api.register(name='course', url='/course/')
