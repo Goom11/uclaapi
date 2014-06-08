@@ -63,9 +63,9 @@ $ python textbook_scraper.py textbook_html/moar_txtbks.html #or multiple_textboo
 TODO
 =======
 
-* ~~Scrape the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx)~~ DONE!
-* ~~Scrape [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm)~~ DONE!
+* Scrape the [textbook store](http://shop.uclastore.com/courselistbuilder.aspx)
+* Scrape [dining hours](https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm)
 * Scrape [dining menus](http://menu.ha.ucla.edu/foodpro/default.asp)
 * Scrape the [Registrar](http://www.registrar.ucla.edu/catalog/catalog-curricul.htm)
 * Scrape [library hours](http://www.library.ucla.edu/about/hours)
-* Fix 'argparse'
+* midterm/final/homework/quiz/lectureSlides/notes/cheatSheet/studyGuide BANK
